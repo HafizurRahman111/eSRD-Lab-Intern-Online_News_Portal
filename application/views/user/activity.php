@@ -26,11 +26,11 @@
 				</thead>
 				<tbody id="myTable">
 				<?php
-				$this->db->select('user_credential.user_id,user_credential.name,user_session.id,user_session.ipaddress,user_session.os,user_session.browser,user_activity.request_datetime,user_activity.title,user_activity.number_times,user_activity.active_time');
-				$this->db->from('user_credential');
-				$this->db->join('user_session', 'user_credential.user_id = user_session.user_id');
-				$this->db->join('user_activity', 'user_session.id = user_activity.id');
-				$this->db->order_by('user_activity.request_datetime', 'DESC');
+				$this->db->select('user_infos.user_id,user_infos.name,user_session.id,user_session.ipaddress,user_session.os,user_session.browser,user_activity.start_time,user_activity.title,user_activity.number_times,user_activity.active_time');
+				$this->db->from('user_infos');
+				$this->db->join('user_session', 'user_infos.user_id = user_session.user_id');
+				$this->db->join('user_activity', 'user_session.sid = user_activity.id');
+				$this->db->order_by('user_activity.start_time', 'DESC');
 				$join_query = $this->db->get()->result_array();
 				foreach ($join_query as $d) {
 					echo '<tr>';
@@ -40,7 +40,7 @@
 					echo '<td>' . $d['ipaddress'] . '</td>';
 					echo '<td>' . $d['os'] . '</td>';
 					echo '<td>' . $d['browser'] . '</td>';
-					echo '<td>' . $d['request_datetime'] . '</td>';
+					echo '<td>' . $d['start_time'] . '</td>';
 					echo '<td>' . $d['title'] . '</td>';
 					echo '<td>' . $d['number_times'] . '</td>';
 					echo '<td>' . round(($d['active_time']) / 1000) . 's</td>';

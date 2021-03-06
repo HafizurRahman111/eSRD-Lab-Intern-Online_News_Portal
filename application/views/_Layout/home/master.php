@@ -1,12 +1,15 @@
 <?php
-//Get userinfo for session
-$user = array(
-	'ipaddress' => $this->input->ip_address(),
-	'os' => $this->agent->platform(),
-	'session_id'=>session_id(),
-	'user_id'=>$this->session->userid,
-	'browser' => $this->agent->browser()
-);
+
+	//Get userinfo for session
+	$user = array(
+					'ipaddress' => $this->input->ip_address(),
+					'os' => $this->agent->platform(),
+					'session_id'=>session_id(),
+					'user_id'=>$this->session->userid,
+					'browser' => $this->agent->browser(),
+					'version' => $this->agent->version(),
+	            );
+
 $id = $this->sesMod->add_session($user);
 
 //user_activity for passing to DB
@@ -33,7 +36,7 @@ if ($query1->num_rows() == 0) {
 $this->session->previous_page = $page_title;
 //Load Master view
 
-$this->load->view("_Layout/home/header.php");
+$this->load->view("_Layout/home/header_esrd.php");
 $this->load->view($page);
-$this->load->view("_Layout/home/footer.php");
+$this->load->view("_Layout/home/footer_esrd.php");
 $this->load->library('user_agent');

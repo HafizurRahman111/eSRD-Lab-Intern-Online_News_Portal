@@ -6,6 +6,7 @@ class SessionModel extends CI_Model
         //get the data from controller and insert into the table 'users'
         $rq = $this->db->get_where('user_session', $data);
         $lid = 0;
+        
         if($rq->num_rows()==0) {
             $this->db->insert('user_session', $data);
             $lid = $this->db->insert_id();
