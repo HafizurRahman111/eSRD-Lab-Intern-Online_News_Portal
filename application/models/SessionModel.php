@@ -1,9 +1,15 @@
+
+
+ <!----------------------  Session Model Page for Activity ---------------------->
+
 <?php
-class SessionModel extends CI_Model
+
+ class SessionModel extends CI_Model
 {
-    public function add_session($data)
+     public function add_session($data)
     {
-        //get the data from controller and insert into the table 'users'
+        //get the data from controller and insert into the table
+
         $rq = $this->db->get_where('user_session', $data);
         $lid = 0;
         
@@ -17,9 +23,11 @@ class SessionModel extends CI_Model
         
         return $lid; 
     }
-    public function add_activity($data)
+
+     public function add_activity($data)
     {
-        //get the data from controller and insert into the table 'users'
+        //get the data from controller and insert into the table
         return $this->db->insert('user_activity', $data);
     }
+    
 }

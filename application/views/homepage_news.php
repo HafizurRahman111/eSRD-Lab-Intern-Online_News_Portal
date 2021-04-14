@@ -1,24 +1,35 @@
 
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="assets/css/animate.css">
-<link rel="stylesheet" type="text/css" href="assets/css/font.css">
-<link rel="stylesheet" type="text/css" href="assets/css/li-scroller.css">
-<link rel="stylesheet" type="text/css" href="assets/css/slick.css">
-<link rel="stylesheet" type="text/css" href="assets/css/jquery.fancybox.css">
-<link rel="stylesheet" type="text/css" href="assets/css/theme.css">
-<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <!-----------------------------------  eSRD News ------------------------------->
+                <!----------------  Md. Hafizur Rahman ---------------->
+       <!---------------------- News Homepage View Page ---------------------->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!DOCTYPE html>
+ <html>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
-    
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/font.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/li-scroller.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/slick.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/jquery.fancybox.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/theme.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+        
+  <head>
+
+ </head>
 
 
-
+ <body>
 
   <section id="sliderSection">
     <div class="row">
@@ -28,38 +39,29 @@
 
           <?php
 
-
             $this->db->select('*');
             $this->db->from('news');
             $this->db->order_by('n_id', 'DESC'); 
-            $this->db->limit(5 , 0);
+            $this->db->limit(10 , 0);
             $join_query = $this->db->get()->result_array();
 
 
             foreach ($join_query as $row ) 
-            {?>
+          {?>
 
-            
+              <div class="single_iteam"> <a href='newsdetails?id="<?=$row['n_id'] ?>"'> <img src="assets/uploads/<?php echo $row['file'];?>" alt="Not Found" class="img-responsive"/>  </a>
+              <div class="slider_article">
+                  <h2><a class="slider_tittle" href='newsdetails?id="<?=$row['n_id'] ?>"'><?=$row['n_title'] ?> </a></h2>
+                  <p><?=$row['short_des'] ?></p>
+                </div>
+              </div>
 
-          <div class="single_iteam"> <a href='newsdetails?id="<?=$row['n_id'] ?>"'> <img src="images/slider_img4.jpg" alt=""></a>
-          <div class="slider_article">
-              <h2><a class="slider_tittle" href='newsdetails?id="<?=$row['n_id'] ?>"'><?=$row['n_title'] ?> </a></h2>
-              <p><?=$row['short_des'] ?></p>
-            </div>
-          </div>
-
-
-
-
-            <?php
+          <?php
 
             }
 
-            ?>
+          ?>
 
-
-
-          
         </div>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-4">
@@ -75,31 +77,28 @@
 
        <?php
 
+            $this->db->select('*');
+            $this->db->from('news');
+            $this->db->order_by('n_id', 'DESC'); 
+            $this->db->limit(5 , 0);
+            $join_query = $this->db->get()->result_array();
 
-              $this->db->select('*');
-              $this->db->from('news');
-              $this->db->order_by('n_id', 'DESC'); 
-              $this->db->limit(5 , 0);
-              $join_query = $this->db->get()->result_array();
 
-
-            foreach ($join_query as $row ) 
-          {?>
+          foreach ($join_query as $row ) 
+        {?>
 
            <li>
-                 <div class="media">  <a href='newsdetails?id="<?=$row['n_id'] ?>"'  class="media-left"> <img alt="" src="images/post_img1.jpg"> </a>
+                 <div class="media">  <a href='newsdetails?id="<?=$row['n_id'] ?>"'  class="media-left"> <img src="assets/uploads/<?php echo $row['file'];?>" alt="Not Found" class="img-responsive"/>  </a>
                   <div class="media-body">  <a href='newsdetails?id="<?=$row['n_id'] ?>"' class="catg_title"> <?=$row['n_title'] ?> </a> </div>
                 </div>
            </li>
 
-          
        <?php
 
      }
 
-   ?>
+    ?>
              
-
 
             </ul>
             <div id="next-button"><i class="fa  fa-chevron-down"></i></div>
@@ -108,7 +107,6 @@
       </div>
     </div>
   </section>
-
 
 
   <section id="contentSection">
@@ -127,37 +125,32 @@
 
               <?php
 
-
-
                 $cat="International" ;
 
-                              $this->db->select('*');
-                              $this->db->from('news');
-                              $this->db->where('category', $cat); 
-                              $this->db->order_by('date_pub', 'DESC'); 
-                              $this->db->limit(1 , 0);
-                              $join_query = $this->db->get()->result_array();
+                      $this->db->select('*');
+                      $this->db->from('news');
+                      $this->db->where('category', $cat); 
+                      $this->db->order_by('date_pub', 'DESC'); 
+                      $this->db->limit(1 , 0);
+                      $join_query = $this->db->get()->result_array();
 
 
-                  foreach ($join_query as $row ) 
-                {?>
+                foreach ($join_query as $row ) 
+              {?>
 
 
                 <li>
-                  <figure class="bsbig_fig">  <a href='newsdetails?id="<?=$row['n_id'] ?>"' class="featured_img"> <img alt="" src="images/featured_img1.jpg"> <span class="overlay"></span> </a>
+                  <figure class="bsbig_fig">  <a href='newsdetails?id="<?=$row['n_id'] ?>"' class="featured_img"> <img src="assets/uploads/<?php echo $row['file'];?>" alt="Not Found" class="img-responsive"/>  <span class="overlay"></span> </a>
                     <figcaption> <a href='newsdetails?id="<?=$row['n_id'] ?>"'> <?=$row['n_title'] ?> </a> </figcaption>
                     <p><a href='newsdetails?id="<?=$row['n_id'] ?>"'> <?=$row['short_des'] ?>  </p>
                   </figure>
                 </li>
 
+           <?php
 
+         }
 
-        <?php
-
-  }
-
-  ?>
-
+         ?>
 
 
               </ul>
@@ -170,20 +163,19 @@
            
            $cat="International" ;
 
-                          $this->db->select('*');
-                          $this->db->from('news');
-                          $this->db->where('category', $cat); 
-                          $this->db->order_by('date_pub', 'DESC'); 
-                          $this->db->limit(4 , 1);
-                          $join_query = $this->db->get()->result_array();
+                $this->db->select('*');
+                $this->db->from('news');
+                $this->db->where('category', $cat); 
+                $this->db->order_by('date_pub', 'DESC'); 
+                $this->db->limit(4 , 1);
+                $join_query = $this->db->get()->result_array();
 
 
-             foreach ($join_query as $row ) 
-           {?>
+            foreach ($join_query as $row ) 
+         {?>
 
-     
           <li>
-           <div class="media wow fadeInDown"> <a href='newsdetails?id="<?=$row['n_id'] ?>"' class="media-left" > <img alt=""src="images/post_img1.jpg"> </a>
+           <div class="media wow fadeInDown"> <a href='newsdetails?id="<?=$row['n_id'] ?>"' class="media-left" > <img src="assets/uploads/<?php echo $row['file'];?>" alt="Not Found" class="img-responsive"/>  </a>
              <div class="media-body"> <a href='newsdetails?id="<?=$row['n_id'] ?>"' class="catg_title"> <?=$row['n_title'] ?>  </a> </div> <br />
            </div>
           </li>
@@ -196,7 +188,6 @@
       ?>
 
 
-                
               </ul>
             </div>
           </div>
@@ -219,23 +210,23 @@
 
               $cat="Technology" ;
 
-                            $this->db->select('*');
-                            $this->db->from('news');
-                            $this->db->where('category', $cat); 
-                            $this->db->order_by('date_pub', 'DESC'); 
-                            $this->db->limit(1 , 0);
-                            $join_query = $this->db->get()->result_array();
+                  $this->db->select('*');
+                  $this->db->from('news');
+                  $this->db->where('category', $cat); 
+                  $this->db->order_by('date_pub', 'DESC'); 
+                  $this->db->limit(1 , 0);
+                  $join_query = $this->db->get()->result_array();
 
 
                 foreach ($join_query as $row ) 
               {?>
 
-                    <li>
-                      <figure class="bsbig_fig wow fadeInDown"> <a href='newsdetails?id="<?=$row['n_id'] ?>"' class="featured_img"> <img alt="" src="images/featured_img3.jpg"> <span class="overlay"></span> </a>
-                        <figcaption> <a href='newsdetails?id="<?=$row['n_id'] ?>"'><?=$row['n_title'] ?> </a> </figcaption>
-                        <p> <a href='newsdetails?id="<?=$row['n_id'] ?>"'> <?=$row['short_des'] ?> </p>
-                      </figure>
-                    </li>
+                  <li>
+                    <figure class="bsbig_fig wow fadeInDown"> <a href='newsdetails?id="<?=$row['n_id'] ?>"' class="featured_img"> <img src="assets/uploads/<?php echo $row['file'];?>" alt="Not Found" class="img-responsive"/>  <span class="overlay"></span> </a>
+                      <figcaption> <a href='newsdetails?id="<?=$row['n_id'] ?>"'><?=$row['n_title'] ?> </a> </figcaption>
+                      <p> <a href='newsdetails?id="<?=$row['n_id'] ?>"'> <?=$row['short_des'] ?> </p>
+                    </figure>
+                  </li>
 
                   <?php
 
@@ -247,7 +238,6 @@
         </ul>
 
         
-
         <ul class="spost_nav">
 
             <?php
@@ -256,19 +246,19 @@
 
               $cat="Technology" ;
 
-                            $this->db->select('*');
-                            $this->db->from('news');
-                            $this->db->where('category', $cat); 
-                            $this->db->order_by('date_pub', 'DESC'); 
-                            $this->db->limit(2 , 1);
-                            $join_query = $this->db->get()->result_array();
+                  $this->db->select('*');
+                  $this->db->from('news');
+                  $this->db->where('category', $cat); 
+                  $this->db->order_by('date_pub', 'DESC'); 
+                  $this->db->limit(2 , 1);
+                  $join_query = $this->db->get()->result_array();
 
 
-                foreach ($join_query as $row ) 
-              {?>
+              foreach ($join_query as $row ) 
+            {?>
 
               <li>
-                <div class="media wow fadeInDown"> <a href='newsdetails?id="<?=$row['n_id'] ?>"' class="media-left" > <img alt=""src="images/post_img1.jpg"> </a>
+                <div class="media wow fadeInDown"> <a href='newsdetails?id="<?=$row['n_id'] ?>"' class="media-left" > <img src="assets/uploads/<?php echo $row['file'];?>" alt="Not Found" class="img-responsive"/>  </a>
                 <div class="media-body"> <a href='newsdetails?id="<?=$row['n_id'] ?>"'class="catg_title"> <?=$row['n_title'] ?>  </a> </div> <br />
                 </div>
               </li>
@@ -278,10 +268,9 @@
 
               }
 
-              ?>
+            ?>
 
            </ul>
-
 
           </div>
         </div>
@@ -299,28 +288,26 @@
            
                $cat="Sports" ;
 
-                          $this->db->select('*');
-                          $this->db->from('news');
-                          $this->db->where('category', $cat); 
-                          $this->db->order_by('date_pub', 'DESC'); 
-                          $this->db->limit(1 , 0);
-                          $join_query = $this->db->get()->result_array();
+                  $this->db->select('*');
+                  $this->db->from('news');
+                  $this->db->where('category', $cat); 
+                  $this->db->order_by('date_pub', 'DESC'); 
+                  $this->db->limit(1 , 0);
+                  $join_query = $this->db->get()->result_array();
 
 
              foreach ($join_query as $row ) 
            {?>
 
-
-                 <li>
-                    <figure class="bsbig_fig wow fadeInDown"> <a href='newsdetails?id="<?=$row['n_id'] ?>"' class="featured_img"> <img alt="" src="images/featured_img3.jpg"> <span class="overlay"></span> </a>
-                      <figcaption> <a href='newsdetails?id="<?=$row['n_id'] ?>"'><?=$row['n_title'] ?> </a> </figcaption>
-                      <p> <a href='newsdetails?id="<?=$row['n_id'] ?>"'> <?=$row['short_des'] ?> </p>
-                    </figure>
-                  </li>
+            <li>
+              <figure class="bsbig_fig wow fadeInDown"> <a href='newsdetails?id="<?=$row['n_id'] ?>"' class="featured_img"> <img src="assets/uploads/<?= $row['file']?>" alt="Picture Not Found" />  <span class="overlay"></span> </a>
+                <figcaption> <a href='newsdetails?id="<?=$row['n_id'] ?>"'><?=$row['n_title'] ?> </a> </figcaption>
+                <p> <a href='newsdetails?id="<?=$row['n_id'] ?>"'> <?=$row['short_des'] ?> </p>
+              </figure>
+            </li>
                
-                
 
-                <?php
+            <?php
 
             }
 
@@ -334,32 +321,31 @@
            
            $cat="Sports" ;
 
-                          $this->db->select('*');
-                          $this->db->from('news');
-                          $this->db->where('category', $cat); 
-                          $this->db->order_by('date_pub', 'DESC'); 
-                          $this->db->limit(2 , 1);
-                          $join_query = $this->db->get()->result_array();
+              $this->db->select('*');
+              $this->db->from('news');
+              $this->db->where('category', $cat); 
+              $this->db->order_by('date_pub', 'DESC'); 
+              $this->db->limit(2 , 1);
+              $join_query = $this->db->get()->result_array();
 
 
-             foreach ($join_query as $row ) 
-           {?>
+            foreach ($join_query as $row ) 
+          {?>
+
+            <li>
+            <div class="media wow fadeInDown"> <a href='newsdetails?id="<?=$row['n_id'] ?>"' class="media-left" > <img src="assets/uploads/<?php echo $row['file'];?>" alt="Not Found" class="img-responsive"/>  </a>
+              <div class="media-body"> <a href='newsdetails?id="<?=$row['n_id'] ?>"'class="catg_title"> <?=$row['n_title'] ?>  </a> </div> <br />
+            </div>
+            </li>
 
 
-              
-          <li>
-           <div class="media wow fadeInDown"> <a href='newsdetails?id="<?=$row['n_id'] ?>"' class="media-left" > <img alt=""src="images/post_img1.jpg"> </a>
-             <div class="media-body"> <a href='newsdetails?id="<?=$row['n_id'] ?>"'class="catg_title"> <?=$row['n_title'] ?>  </a> </div> <br />
-           </div>
-          </li>
-
+           
 
         <?php
 
       }
 
       ?>
-
 
             
          </ul>
@@ -369,8 +355,6 @@
             </div>
           </div>
 
-
-          
 
           <div class="single_post_content">
             <h2><span>Photography</span></h2>
@@ -398,13 +382,9 @@
             </ul>
           </div>
 
-          
-
-
 
         </div>
       </div>
-
 
 
       <div class="col-lg-4 col-md-4 col-sm-4">
@@ -415,30 +395,24 @@
             <ul class="spost_nav">
 
 
-
-
             <?php
            
-          
-
-                          $this->db->select('*');
-                          $this->db->from('news');
-                          $this->db->order_by('time_visited', 'DESC'); 
-                          $this->db->limit(4 , 0);
-                          $join_query = $this->db->get()->result_array();
+                $this->db->select('*');
+                $this->db->from('news');
+                $this->db->order_by('time_visited', 'DESC'); 
+                $this->db->limit(4 , 0);
+                $join_query = $this->db->get()->result_array();
 
 
-             foreach ($join_query as $row ) 
-           {?>
+           foreach ($join_query as $row ) 
+         {?>
 
-
-          <li>
-             <div class="media wow fadeInDown">  <a href='newsdetails?id="<?=$row['n_id'] ?>"' class="media-left"> <img alt="" src="images/post_img1.jpg"> </a>
-             <div class="media-body"><a href='newsdetails?id="<?=$row['n_id'] ?>"' class="catg_title"> <?=$row['n_title'] ?>  </a> </div>
-             </div>
-          </li>
+            <li>
+              <div class="media wow fadeInDown">  <a href='newsdetails?id="<?=$row['n_id'] ?>"' class="media-left"> <img src="assets/uploads/<?php echo $row['file'];?>" alt="Not Found" class="img-responsive"/>  </a>
+              <div class="media-body"><a href='newsdetails?id="<?=$row['n_id'] ?>"' class="catg_title"> <?=$row['n_title'] ?>  </a> </div>
+              </div>
+            </li>
               
-
         <?php
 
       }
@@ -495,4 +469,6 @@
   </section>
 
 
- 
+
+      </body>
+    </html>

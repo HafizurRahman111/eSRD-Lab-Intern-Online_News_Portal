@@ -1,4 +1,9 @@
+
+ <!----------------------  News Homepage Controller Page ---------------------->
+
+
 <?php
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 
@@ -10,18 +15,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
         parent::__construct();
 
 		  $this->load->model('SessionModel', 'sesMod');
-	}
-
-
-	 public function index()
-	{
-		$data['page_title'] = "eSRD News";
-		$data['page'] = "homepage_news";
-
-		$this->load->view('_Layout/home/master.php', $data);
-
 
 	}
+
+
+		public function index()
+	   {
+			$data['page_title'] = "eSRD News";
+			$data['page'] = "homepage_news";
+
+			$this->load->view('_Layout/home/master.php', $data);
+
+	   }
 
 
 

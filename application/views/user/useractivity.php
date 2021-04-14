@@ -1,6 +1,14 @@
 
+  
+   <!----------------------  My Activity/User Activity view Page ---------------------->
+
+  <!DOCTYPE html>
+  <html>
+
+  
   <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/user_activity_info_design.css" rel="stylesheet" />
 
+  <head>
 
    <style>
 
@@ -12,6 +20,9 @@
 
   </style>
 
+  </head>
+
+  <body>
 
   <section id="contentSection">
   
@@ -48,11 +59,16 @@
 		  echo '
 				  <table>
 					<thead>
-						<tr class="table100-head">
-							<th style="text-align:center;" class="column1"> Page Title </th>
-							<th style="text-align:center;" class="column2"> Times Visited </th>
-							<th style="text-align:center;" class="column3"> Active Times </th>
-						</tr>
+						
+						<div class="table-responsive">
+						<table class="table table-bordered table-striped">
+						
+						<tr>
+							<th style="font-size: 15px; text-align:center;">Page Title</th>
+							<th style="font-size: 15px; text-align:center;">Times Visited</th>
+							<th style="font-size: 15px; text-align:center;">Active Times</th>
+					   </tr>				
+
 					</thead>
 	
 					<tbody>
@@ -145,3 +161,6 @@
 
 
 	</script>
+
+	</body>
+	</html>

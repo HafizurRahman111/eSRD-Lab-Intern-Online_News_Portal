@@ -32,10 +32,10 @@
     
      public function registeruser()
     {
-        $this->form_validation->set_rules('name', 'Name', 'required|min_length[6]');
+        $this->form_validation->set_rules('name', 'Name', 'required|min_length[5]');
         $this->form_validation->set_rules('uname', 'User Name', 'required|trim');
 
-        $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
+        $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]');
         $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required');
         $this->form_validation->set_rules('bdate', 'Birthday', 'required');
 
