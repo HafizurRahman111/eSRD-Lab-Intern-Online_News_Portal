@@ -16,7 +16,9 @@
         if($rq->num_rows()==0) {
             $this->db->insert('user_session', $data);
             $lid = $this->db->insert_id();
-        } else {
+        } 
+        
+        else {
             $dt = $rq->result_array();
             $lid = $dt[0]['sid'];
         }
@@ -26,8 +28,9 @@
 
      public function add_activity($data)
     {
-        //get the data from controller and insert into the table
+        // Get the data from controller and insert into the table
         return $this->db->insert('user_activity', $data);
+        
     }
     
 }

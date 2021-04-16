@@ -1,5 +1,6 @@
 
-      <!----------------------  Profile View Page ---------------------->
+
+<!-----------------------------  Profile View Page ---------------------------->
 
 <!DOCTYPE html>
  <html>
@@ -186,15 +187,8 @@
 
           <div class="card-box text-center">
 
-            <h3> My Profile  </h3>
-             <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="rounded-circle avatar-xl img-thumbnail" alt="profile-image">
-              <br/>  
-              <br/>  
-              
-              
-              <h4 class="mb-0"> <?= $this->session->userdata('name') ?> </h4> 
-              <p class="text-muted">@ <?= $this->session->userdata('uname') ?></p>
-              
+           
+            
                         
       <?php
                 
@@ -209,8 +203,24 @@
         
           foreach ($res as $d) 
          {
-              
+                
+            $originalDate = $d['bdate'];
+            $newBirthDate = date("d-m-Y", strtotime($originalDate)) ;
+
+            $uDate = $d['udate'];
+            $newRegDate = date("d-m-Y H:i:s", strtotime($uDate)) ;
+
             echo' 
+           
+            <img src="assets/user_pic/'.$d['file'].'" style="height:200px; width:200px;" class="rounded-circle avatar-xl img-thumbnail" alt="profile-image"/> 
+         
+
+            <br/>  
+            <br/>  
+            
+            
+            <h4 class="mb-0">  ' . $d['name'] . '  </h4> 
+            <p class="text-muted">@ ' . $d['uname'] . ' </p>
                 
             <div class="text-left mt-3">
                 <p  class="text-muted mb-2 font-13"> <b> <i class="fa fa-id-card fa-fw w3-margin-right w3-large w3-text-teal"> </i> User ID : </b> <span class="ml-2 "> ' . $d['user_id'] . ' </span></p>
@@ -233,10 +243,10 @@
  
                  <hr />
                  <p class="text-muted mb-2 font-13"> <b> <i class="fa fa fa-venus-mars fa-fw w3-margin-right w3-large w3-text-teal"></i> Gender : </b> <span class="ml-2"> ' . $d['gender'] . ' </span></p>
-                 <p class="text-muted mb-2 font-13"> <b> <i class="fa fa fa-birthday-cake fa-fw w3-margin-right w3-large w3-text-teal"></i> Birthday : </b> <span class="ml-2">  ' . $d['bdate'] . ' </span></p>
+                 <p class="text-muted mb-2 font-13"> <b> <i class="fa fa fa-birthday-cake fa-fw w3-margin-right w3-large w3-text-teal"></i> Birthday : </b> <span class="ml-2">  '.$newBirthDate.'  </span></p>
                  <p class="text-muted mb-2 font-13"> <b> <i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i> Address : </b> <span class="ml-2">  ' . $d['address'] . ' </span></p>
  
-                 <p class="text-muted mb-2 font-13"> <b> <i class="fa fa fa-registered fa-fw w3-margin-right w3-large w3-text-teal"></i> Registration Date : </b> <span class="ml-2"> ' . $d['udate'] . ' </span></p>
+                 <p class="text-muted mb-2 font-13"> <b> <i class="fa fa fa-registered fa-fw w3-margin-right w3-large w3-text-teal"></i> Registration Date : </b> <span class="ml-2"> '.$newRegDate.' </span></p>
                  <p class="text-muted mb-2 font-13"> <b> <i class="fa fa-check-circle fa-fw w3-margin-right w3-large w3-text-teal"> </i> Account Status : </b> <span class="ml-2">  ' . $d['u_status'] . ' </span></p>
                  <br />
  
@@ -298,11 +308,69 @@
 
           <div class="tab-pane show active" id="profilehome">
                
-             <h4>My Activity Info</h4>
+             <h4>My Activity Info
                
              <a style="color:green; text-align:right;" href="activity">
                <button class="button_login button-block"/>Click Here</button>
-            </a>
+            </a> </h4>
+            
+            <hr />
+
+           
+
+            <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            
+
+            <form action="<?= base_url(); ?>profile/change_photo" method="post" enctype='multipart/form-data'>
+
+                <?php if ($this->session->flashdata())
+                  { ?>
+                      <div class="alert alert-danger">
+                        <?= $this->session->flashdata('errors'); ?>
+                      </div>
+
+                    <?php } 
+                  ?>
+
+
+              <div class="modal-content">
+                <div class="modal-header text-center">
+                  <h4 class="modal-title w-100 font-weight-bold"> Change Photo</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span> Close
+                  </button>
+                  <br />
+
+                </div>
+
+
+                <div class="modal-body mx-3">
+                  
+                  <div class="md-form mb-5">
+                    
+                    
+                    <input name="file" id="fileupload" type="file" multiple="true" class="form-control validate">
+                  </div>
+                 
+                
+
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                  <button class="btn btn-deep-orange">Save</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          </form>
+
+          <div class="text-center">
+            <a href="" class="btn btn-info" style="color:green;" data-toggle="modal" data-target="#modalRegisterForm">Change Photo</a>
+          </div>
+
+
+
 
           </div>
 
@@ -417,7 +485,7 @@
   </div>
  
 
-    <!-----------------------Session Info ------------------------->
+    <!-----------------------------------  Session Info  ------------------------->
 
              
           <div class="tab-pane" id="session">
@@ -567,51 +635,49 @@
 
         <div class="tab-pane" id="editprofile">
 
+
+      
+
+        <!--- Password Change ----------> 
         
-        <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-            
+        <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+             
+              <form action="<?= base_url(); ?>profile/change_password" method="post">
 
-            <form action="<?= base_url(); ?>profile/change_password" method="post">
+                 <?php if ($this->session->flashdata())
+                { ?>
+                    <div class="alert alert-danger">
+                      <?= $this->session->flashdata('errors'); ?>
+                    </div>
 
-            <?php if ($this->session->flashdata())
-                           { ?>
-                                <div class="alert alert-danger">
-                                  <?= $this->session->flashdata('errors'); ?>
-                                </div>
-
-                              <?php } 
-                           ?>
+                  <?php } 
+                 ?>
 
 
-
-              <div class="modal-content">
-                <div class="modal-header text-center">
-                  <h4 class="modal-title w-100 font-weight-bold"> Change Password</h4>
+                  <h4 class="modal-title w-100 font-weight-bold" style="text-align:center;"> Change Password</h4>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span> Close
                   </button>
                   <br />
 
-                </div>
 
-               
-
-                <div class="modal-body mx-3">
+                  <div class="modal-body mx-3">
                   <div class="md-form mb-5">
-                    <label data-error="wrong" data-success="right" for="orangeForm-name">Current Password</label>
-                    <input type="password" name="old_pass" id="orangeForm-name" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="oldpass">Current Password</label>
+                    <input type="password" name="old_pass" id="oldpass" class="form-control validate">
                    
                   </div>
                   <div class="md-form mb-5">
-                    <label data-error="wrong" data-success="right" for="orangeForm-email">New Password</label>
-                    <input type="password" name="new_pass" id="orangeForm-email" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="newpass">New Password</label>
+                    <input type="password" name="new_pass" id="newpass" class="form-control validate">
                    
                   </div>
 
                   <div class="md-form mb-4">
-                   <label data-error="wrong" data-success="right" for="orangeForm-pass">Confirm New password</label>
-                    <input type="password" name="confirm_pass" id="orangeForm-pass" class="form-control validate">
+                   <label data-error="wrong" data-success="right" for="conpass">Confirm New password</label>
+                    <input type="password" name="confirm_pass" id="conpass" class="form-control validate">
                     
                   </div>
 
@@ -619,40 +685,37 @@
                 <div class="modal-footer d-flex justify-content-center">
                   <button class="btn btn-deep-orange">Save</button>
                 </div>
-              </div>
+
+
+            </form>
+            
             </div>
           </div>
+        </div>
 
-          </form>
+    
+    <div class="text-center">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Change Password</button>
+    </div>
 
-          <div class="text-center">
-            <a href="" class="btn btn-info" data-toggle="modal" data-target="#modalRegisterForm">Click Here ( Change Password )</a>
-          </div>
-
-
-
-
-
+        <!------- Personal Info Update --------->
 
         <form action="<?= base_url(); ?>profile/edit_profile" method="post">
            <h5 class="mb-3 text-uppercase bg-light p-2"><i class="mdi mdi-account-circle mr-1"></i> Personal Info</h5>
                      
             <div class="row">
 
-                         <?php if ($this->session->flashdata())
-                           { ?>
-                                <div class="alert alert-danger">
-                                  <?= $this->session->flashdata('errors'); ?>
-                                </div>
+                <?php if ($this->session->flashdata())
+                  { ?>
+                      <div class="alert alert-danger">
+                        <?= $this->session->flashdata('errors'); ?>
+                      </div>
 
-                              <?php } 
-                           ?>
-
-
+                    <?php } 
+                  ?>
 
 
-
-<?php
+          <?php
                 
                 $a = $this->session->userid;
                   
@@ -664,24 +727,33 @@
                   
                 
                 
-                foreach ($res as $m ) 
+                 foreach ($res as $m ) 
                 {?>
 
 
-
-              <div class="col-md-6">
-                <div class="form-group">
-                    <label for="fullname">Full Name</label>
-                    <input type="text" class="form-control" name="name"  value="<?php echo $this->session->userdata('name'); ?>" >
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="fullname">Full Name</label>
+                        <input type="text" class="form-control" name="name"  value="<?php echo $this->session->userdata('name'); ?>" >
+                    </div>
                 </div>
-             </div>
 
-             <div class="col-md-6">
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="text" class="form-control" name="phone" value="<?=$m['phone'] ?>">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="text" class="form-control" name="phone" value="<?=$m['phone'] ?>">
+                    </div>
+                </div> 
+
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="phone">Address</label>
+                        <input type="text" class="form-control" name="address" value="<?=$m['address'] ?>">
+                    </div>
                 </div>
-             </div> 
+
+
 
            </div> 
 
@@ -689,17 +761,14 @@
            <div class="row">
 
            
-
          </div> 
-
-                
 
 
         <?php
 
          }
 
-     ?>
+       ?>
 
                      
         <div class="text-right">

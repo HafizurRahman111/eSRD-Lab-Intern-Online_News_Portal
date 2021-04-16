@@ -15,7 +15,7 @@
         parent::__construct();
 
         $this->load->model('LiveSearchModel', 'livesearch');
-		  $this->load->model('SessionModel', 'sesMod');
+		     $this->load->model('SessionModel', 'sesMod');
 
     }
 
@@ -81,7 +81,7 @@
                         <td>'.$row->author.'</td>
                         <td>'.$row->category.'</td>
                         <td>'.$row->date_pub.'</td>
-                        <td>'.$row->photo.'</td>
+                        <td>  <img src="assets/uploads/'.$row->file.'" style="height:100px; width:100px;" class="responsive" alt="profile-image"/> </td>
                     
                     '; 
                 

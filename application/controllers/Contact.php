@@ -61,8 +61,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
               } 
               
               else {
-                  $this->session->logged_in = false;
-                  redirect(base_url() . 'about');
+                     $this->session->logged_in = false;
+                     redirect(base_url() . 'about');
               }
               
           }

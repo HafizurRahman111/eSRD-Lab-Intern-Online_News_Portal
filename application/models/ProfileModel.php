@@ -57,105 +57,55 @@
     }
 
 
-     public function edit($data)
-    {
-        $uid = $this->session->userid;
 
-        $name = $data['name'];
-        $phone = $data['phone'];
-      
-        $data = array('name' => $name, 'phone' => $phone );
+//
+   
 
-        $this->db->where('user_id', $uid);
-        $this->db->update('user_infos', $data);
+     public function update_data ($data)
+   {
 
-        $user_id = $this->db->insert_id();
-        $insert_data = $this->update_userinfo($data);
+        $id = $this->session->userid;
 
-       
-         if ($insert_data) 
-         {
-             return $user_id;
-         }
- 
-         return false;
- 
+        $this->db->where('user_id',$id);
+        return $this->db->update('user_infos', $data);
 
-
-
-     
 
     }
 
 
-    public function update_userinfo($data)
+
+
+
+     public function update_userinfo($data)
     {
 
         
         //get the data from controller and insert into the table 'user_infos'
 
-    
-
         return $this->db->update('user_infos', $data) ;
 
     }
 
-
-
-    public function change_pass($data)
-    {
-        $op = $data['old_pass'];
-
-        $old_pass = md5($this->input->post($op));
-        
-
-
-        $np = $data['new_pass'];
-
-        $new_pass = md5($this->input->post(np));
-
-
-        $confirm_pass = $data['confirm_pass'];
-       
-        $data = array( 'password' => $new_pass   );
-        $user_id = $this->db->insert_id();
-        $insert_data = $this->update_pass($data);
-
-       
-
-         if ($insert_data) 
-        {
-            return $user_id;
-        }
-
-        return false;
-
-    }
-
-
-     public function update_pass($data)
-    {
-
-        $uid = $this->session->userid;
-
-       
-
-        $this->db->where('user_id', $uid);
-        $this->db->where('password', $old_pass);
-
-        $result = $this->db->get('user_infos');
-
-
-        //get the data from controller and insert into the table 'user_infos'
-
-
-        return $this->db->update('user_infos', $data) ;
-
-    }
 
 
 
    
+ // Upload Profile Photo Complete 
+
+     public function insert_photo ($data)
+    {
+
+        $id = $this->session->userid;
+
+        $this->db->where('user_id',$id);
+        return $this->db->update('user_infos', $data);
+
+
+    }
+
+
+
+
 
     
 }

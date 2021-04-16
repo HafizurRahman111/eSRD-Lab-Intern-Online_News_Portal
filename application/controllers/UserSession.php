@@ -1,8 +1,13 @@
+
+<!--------------------- User Session Controller Page --------------->
+
+
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
+
+  defined('BASEPATH') or exit('No direct script access allowed');
 
 
-class UserSession extends CI_Controller
+ class UserSession extends CI_Controller
 {
     public function __construct()
     {
@@ -11,7 +16,8 @@ class UserSession extends CI_Controller
         
     }
 
-    public function settime()
+
+     public function settime()
     {
         $id = $this->session->ses_id;
         $page_url = $this->session->page_url;
@@ -26,4 +32,6 @@ class UserSession extends CI_Controller
         $this->db->update('user_activity');
 
     }
+
+    
 }
