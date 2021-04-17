@@ -1,243 +1,46 @@
-
- <!----------------------  Log In View Page ---------------------->
-
-
-<!DOCTYPE html>
- <html>
-
-  <head>
-
-   <style>
-
-     
-		  *,
-      *:before,
-      *:after {
-                box-sizing: border-box;
-              }
-
-       h2,h4 {
-               color: #7ed321;
-             }
-
-      input,
-            input[type="radio"] + label,
-           
-            select option,
-
-            
-     /*   Input Field           */ 
-
-            select {
-                     width: 140%;
-                     padding: 1em;
-                     line-height: 1.4;
-                     background-color: #f5f5f5;
-                     border: 1px solid #e5e5e5;
-                     border-radius: 5px;
-                     
-                   }
-
-     
-   /*   Input Field Margin /Gap                 */ 
-
-      .input-group {
-
-                     margin-bottom: 10px;
-  
-                   }
-
-   
-            
- /*   Input Icon                 */ 
-
-     .input-group-icon {
-                          position: relative;
-                        }
-
-                              
-   /*   Input Placeholder Position                 */  
-
-     .input-group-icon input {
-                                padding-left: 5em;
-                             }
-
-
-
-    /*    Fontawesome Logo Design                 */  
-
-    .input-group-icon .input-icon {
-                                    position: absolute;
-                                    top: 15px;
-                                    left: 5;
-                                    width: 3.5em;
-                                    height: 3.5em;
-                                    line-height: 1em;
-                                    text-align: center;
-                                    pointer-events: none;
-                                    color:#4d4d4d;
-                                    
-                                }
-
-
-     /*   |         Design            */
-
-     .input-group-icon .input-icon:after {
-                                 position: absolute;
-                                 top: 0;
-                                 bottom: 2.2em;
-                                 left: 3.4em;
-                                 display: block;
-                                 border-right: 2px solid #cccccc;
-                                 content: "";
-                               
-                              }
-
-
-        .container1 {
-                        max-width: 450px;
-                        padding: 1em 3em 5em 3em;
-                        margin: 2em auto;
-                        background-color: #fff;
-                        border-radius: 5px;
-                        box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
-                       
-                   }
-
-
-        .button-block {
-                        display:block;
-                        width:200%;
-                     }
-
-        .button_login {
-
-                         border:0;
-                         outline:none;
-                         border-radius:0;
-                         padding:15px 0;
-                         font-size:14px;
-  
-                         text-transform:uppercase;
-                         letter-spacing:.1em;
-                         background:rgb(64, 139, 253);
-                         color:white;
-  
-                     }
-
-        
-      .contact_area{
-                     background-color: #f1f1f1;
-                  }
-
-
-      .team-section{
-                    overflow: hidden;
-                    background-color: #f1f1f1;
-                    padding: 20px;
-                   }
-
-        .border{
-                  display: block;
-                  margin: auto;
-                  width: 600px;
-                  height: 5px;
-                  background: #3498db;
-                  margin-bottom: 20px;
-              }
-
-
-       .section{
-                  width: 600px;
-                  margin: auto;
-                  font-size:20px;
-                  color: black;
-                  text-align: justify;
-                  margin-bottom: 35px;
-               }
-
-
-     .section:target {
-                       height: auto;	
-                      }
-
-   </style>
-
-  </head>
-
-
-  <body>
-
-  <br />
-  
-  <section id="contentSection">
-   <br />
-   <div class="team-section">
-
-      <div class="container1">
-    
-      <h2 style="text-align:center">Log In to Account </h2>
-
-       <hr />
-        
-         <form action="<?= base_url(); ?>login/doLogin" method="post">
-
-         <!---------- Alert for Login ( Wrong Email/Password , Successful Log In)    ------->
-
-          <?php if ($this->session->flashdata()) 
-            { ?>
-              <div class="alert alert-warning">
-                <?= $this->session->flashdata('msg'); ?>
-              </div>
-           <?php } 
-         ?>
-
-            
-           <br />
-           
-            <div class="input-group input-group-icon">
-              <input type="text" name="email" placeholder="Enter Your E-mail" required/>
-              <div class="input-icon"><i class="fa fa-envelope"></i></div>
-            </div>
-
-            <div class="input-group input-group-icon">
-              <input type="password" name="password" placeholder="Enter Your Password " required/>
-              <div class="input-icon"><i class="fa fa-key"></i></div>
-           </div>
-
-          <br />
-
-          <div class="input-group input-group-icon">
-             <button type ="submit" name ="submit" class="button_login button-block"/>Log In</button>
-          </div>
-
-          <br />
-          <hr />
-
-          <div>
-            <a style="color:green; text-align:right;" href="register"><h4>New User ? <b> Register Here </b></h4></a>
-         </div>
-
-          
-        </form>
-
-     </div>
-
-    </div>
-
-      <br />
-      
-    </section>
-
-
-	  </body>
-	</html>
-
-
-  <!----------------------------------    Login Page Complete  ---------------------------------->
-
-  
-
-
-
-
+<div class="container border" style="height: 100vh;">
+
+	<form action="<?= base_url(); ?>login/doLogin" method="post">
+		<div class="row">
+			<div class="col">
+			</div>
+			<div class="col-8 shadow mt-5 rounded">
+				<div class="form-group m-5">
+					<h2 class="text-center"><i class="fas fa-user"></i> Login </h2>
+					<hr>
+
+					<?php if ($this->session->flashdata()) { ?>
+						<div class="alert alert-warning">
+							<?= $this->session->flashdata('msg'); ?>
+						</div>
+					<?php } ?>
+
+					<div class="row mt-2">
+						<div class="col-3">
+							<label for="email">Email address:</label>
+						</div>
+						<div class="col">
+							<input name="email" type="email" class="form-control form-control-sm"
+								   placeholder="Enter email" id="email ">
+						</div>
+					</div>
+					<div class="row mt-2">
+						<div class="col-3">
+							<label for="pwd">Password:</label>
+						</div>
+						<div class="col">
+							<input type="password" class="form-control form-control-sm" id="pwd" name="password"
+								   placeholder="Password">
+						</div>
+					</div>
+
+					<hr>
+					<button class="btn btn-primary mt-2 mb-2 float-right" type="submit">Login</button>
+					<br>
+				</div>
+			</div>
+			<div class="col">
+			</div>
+		</div>
+	</form>
+</div>
